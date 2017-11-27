@@ -4,6 +4,12 @@ import { leave } from '@angular/core/src/profile/wtf_impl';
 // importo le animazioni necessarie
 import { trigger,style,transition,animate,keyframes,query,stagger } from '@angular/animations';
 
+
+//importo i servizi che mi servono
+import { DataService } from '../data.service';
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -52,13 +58,16 @@ export class HomeComponent implements OnInit {
   itemCounter: number = 4;
   btnText: string = 'Add an item';
   goalText: string = 'My first goal item test';
-  goals: string[]  = ['test1','aaaa bb asfsdkjfs fsdfs sdfs','s  skfds js sff s jjs.'];
+  goals: string[]  = [];
 
  
 
-  constructor() { }
+  //nel costruttore inserisco il servizio da usare
+  constructor(private _data: DataService) { }
 
   ngOnInit() {
+    this._data.goal.subscribe(res=> this.goals = res);
+    this._data.changeGoal(this.goals);
     this.itemCounter = this.goals.length;
   }
 
@@ -67,6 +76,7 @@ export class HomeComponent implements OnInit {
     this.goals.push(this.goalText);
     this.goalText='';
     this.itemCounter = this.goals.length;
+    this._data.changeGoal(this.goals);
 
   }
 
@@ -75,6 +85,7 @@ export class HomeComponent implements OnInit {
     //alert(item);
     this.goals.splice(item,1);
     this.itemCounter = this.goals.length;
+    this._data.changeGoal(this.goals);
   }
 
 }

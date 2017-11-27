@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+//carico il servizio
+import { DataService } from './data.service';
 
 //importo il modulo per le animazioni
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,7 +31,8 @@ import { AboutComponent } from './about/about.component';
     //aggiungo il momdulo delle animazioni
     BrowserAnimationsModule
   ],
-  providers: [],
+  //nel provider inietto i servizi decorati da @Injectable
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

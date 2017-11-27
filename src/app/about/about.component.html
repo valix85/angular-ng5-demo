@@ -5,3 +5,7 @@
   <a (click)="sendToHome()">Torna alla home (con navigazione Router in funzione)</a><br>
   <a routerLink="">Inizio (con routerLink nativo)</a>
 </p>
+
+<ul>
+<li *ngFor="let goal of goals">{{goal}}</li>
+</ul>
