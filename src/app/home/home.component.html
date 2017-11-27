@@ -1,0 +1,38 @@
+<!-- <p>
+  home comnponent works!
+</p>
+-->
+<div class="container color-dark">
+  <div class="col">
+    <p>Add a bucket list item</p>
+  </div>
+  <div class="col">
+    <!-- le parentesi graffe sono in lettura dal modal alla view -->
+    
+    <p>Your bucket list ({{itemCounter}})</p>
+  </div>
+</div>
+
+<div class="container color-light" [@goals]="goals.length">
+  <div class="col">
+    <p class="sm">Use this form below to add a new bucket list goal.</p>
+    <form action="">
+      <!-- two-ways data binding with [()]
+      () scrivono nel model, da sole non vanno
+      [] leggono dal model
+      -->
+      <input type="text" class="txt" name="item" placeholder="Life goal..." [(ngModel)]="goalText">
+      <br>
+      <p>test binding: <span>{{ goalText }}</span></p>
+      <!-- <input class="btn" type="button" value="{{btnText}}"> -->
+      <!-- per bindare dalla view al modal uso le quadre attorno al parametro -->
+      <input class="btn" type="button" [value]="btnText" (click)="addItem()">
+    </form>
+
+  </div>
+  <div class="col">
+    <p class="life-container" *ngFor="let goal of goals; let i = index" (click)="removeItem(i)">
+      {{goal}}
+    </p>
+  </div>
+</div>
